@@ -1,22 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    // 需要底部栏的页面在根路由的children下注册
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    name: 'index',
+    redirect: '/index',
+    component: () => import('../views/public/BottomNav.vue'),
+    children: [{
+      path: '/index',
+      name: 'index',
+      component: () => import('../views/Index.vue')
+    }, {
+      path: '/plan',
+      name: 'plan',
+      component: () => import('../views/Plan.vue')
+    }, {
+      path: '/sports',
+      name: 'sports',
+      component: () => import('../views/Sports.vue')
+    }, {
+      path: '/news',
+      name: 'news',
+      component: () => import('../views/News.vue')
+    }, {
+      path: '/user',
+      name: 'user',
+      component: () => import('../views/User.vue')
+    }]
   }
 ]
 
